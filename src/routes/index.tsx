@@ -10,13 +10,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { ColorSchemeName, Pressable } from 'react-native'
 
-import Colors from '../constants/Colors'
-import useColorScheme from '../hooks/useColorScheme'
-import ModalScreen from '../screens/ModalScreen'
-import NotFoundScreen from '../screens/NotFoundScreen'
-import TabOneScreen from '../screens/TabOneScreen'
-import TabTwoScreen from '../screens/TabTwoScreen'
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types'
+import Colors from '@constants/Colors'
+import useColorScheme from '@hooks/useColorScheme'
+import ModalScreen from '@screens/ModalScreen'
+import NotFoundScreen from '@screens/NotFoundScreen'
+import TabOneScreen from '@screens/TabOneScreen'
+import TabTwoScreen from '@screens/TabTwoScreen'
+import ChatScreen from '@screens/ChatScreen'
+
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '@base/types'
 import LinkingConfiguration from './LinkingConfiguration'
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -112,6 +114,14 @@ function BottomTabNavigator() {
                             />
                         </Pressable>
                     ),
+                })}
+            />
+            <BottomTab.Screen
+                name='Chat'
+                component={ChatScreen}
+                options={({ navigation }: RootTabScreenProps<'Chat'>) => ({
+                    title: 'Chat',
+                    tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
                 })}
             />
         </BottomTab.Navigator>

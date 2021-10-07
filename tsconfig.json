@@ -1,6 +1,20 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true
-  }
+    "extends": "expo/tsconfig.base",
+    "compilerOptions": {
+        "strict": true,
+        "baseUrl": "src",
+        "paths": {
+            "@src/*": ["*"],
+            "@base/*": ["../*"],
+            "@assets/*": ["assets/*"],
+            "@components/*": ["components/*"],
+            "@constants/*": ["constants/*"],
+            "@context/*": ["context/*"],
+            "@hooks/*": ["hooks/*"],
+            "@screens/*": ["screens/*"],
+            "@customTypes/*": ["../types/*"],
+            "@routes/*": ["routes/*"],
+            "@firebaseInit": ["firebaseConfig/*"]
+        }
+    }
 }
