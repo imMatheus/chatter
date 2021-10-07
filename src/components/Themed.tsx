@@ -9,38 +9,32 @@ import { Text as DefaultText, View as DefaultView } from 'react-native'
 import Colors from '@constants/Colors'
 import useColorScheme from '@hooks/useColorScheme'
 
-export function useThemeColor(
-    props: { light?: string; dark?: string },
-    colorName: keyof typeof Colors.light & keyof typeof Colors.dark
-) {
-    const theme = useColorScheme()
-    const colorFromProps = props[theme]
-
-    if (colorFromProps) {
-        return colorFromProps
-    } else {
-        return Colors[theme][colorName]
-    }
+export type TextProps = DefaultText['props'] & {
+    color?: keyof typeof Colors.light & keyof typeof Colors.dark
 }
-
-type ThemeProps = {
-    lightColor?: string
-    darkColor?: string
+export type ViewProps = DefaultView['props'] & {
+    background?: keyof typeof Colors.light & keyof typeof Colors.dark
 }
-
-export type TextProps = ThemeProps & DefaultText['props']
-export type ViewProps = ThemeProps & DefaultView['props']
 
 export function Text(props: TextProps) {
-    const { style, lightColor, darkColor, ...otherProps } = props
-    const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
+    const { style, color = 'text', ...otherProps } = props
 
-    return <DefaultText style={[{ color }, style]} {...otherProps} />
+    const theme = useColorScheme()
+
+    return <DefaultText style={[{ color: Colors[theme][color] }, style]} {...otherProps} />
 }
 
 export function View(props: ViewProps) {
-    const { style, lightColor, darkColor, ...otherProps } = props
-    const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background')
+    const { style, background = 'background', ...otherProps } = props
 
-    return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />
+    const theme = useColorScheme()
+    console.log('~~~~')
+    console.log(Colors[theme][background])
+
+    return (
+        <DefaultView
+            style={[{ backgroundColor: Colors[theme][background] }, style]}
+            {...otherProps}
+        />
+    )
 }

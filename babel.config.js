@@ -30,6 +30,7 @@ module.exports = function (api) {
                         '@screens': './src/screens',
                         '@customTypes': './types',
                         '@routes': './src/routes',
+                        '@utils': './src/utils',
                         '@firebaseInit': './src/firebaseConfig',
                     },
                 },
