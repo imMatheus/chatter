@@ -13,9 +13,11 @@ declare global {
     namespace ReactNavigation {
         interface RootParamList extends RootStackParamList {}
         interface RegistrationParamList extends RegistrationStackParamList {}
+        interface ChatParamList extends ChatStackParamList {}
     }
 }
 
+// registration routes
 export type RegistrationStackParamList = {
     Login: undefined
     Signup: undefined
@@ -26,9 +28,14 @@ export type RegistrationStackProps<T extends keyof RegistrationStackParamList> =
     navigation: StackNavigationProp<RegistrationStackParamList, T>
     route: RouteProp<RegistrationStackParamList, T>
 }
+
+// root routes
 export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined
     Modal: undefined
+    UserModal: {
+        id: string
+    }
     NotFound: undefined
 }
 
@@ -40,11 +47,29 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
     TabOne: undefined
     TabTwo: undefined
-    Chats: undefined
-    Chat: undefined
+    ChatsStack: undefined
+    UserModal: {
+        id: string
+    }
 }
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
 >
+
+// chat routes
+export type ChatStackParamList = {
+    Chat: {
+        id: string
+    }
+    Chats: undefined
+    UserModal: {
+        id: string
+    }
+}
+
+export type ChatStackProps<T extends keyof ChatStackParamList> = {
+    navigation: StackNavigationProp<ChatStackParamList, T>
+    route: RouteProp<ChatStackParamList, T>
+}

@@ -3,19 +3,21 @@ import { Pressable, StyleSheet } from 'react-native'
 import { useAuth } from '@context/AuthContext'
 import { SvgXml } from 'react-native-svg'
 import { Text, View } from '@components/Themed'
+import { ChatStackParamList, ChatStackProps } from '@routes/types'
 interface ChatProps {
     title: string
+    enterChatHandler: () => void
+    userPressHandler?: () => void
 }
 
-const Chat: React.FC<ChatProps> = ({ title }) => {
+const Chat: React.FC<ChatProps> = ({ title, enterChatHandler, userPressHandler }) => {
     const { currentUser } = useAuth()
     const imageSize = 50
-    console.log()
     if (!currentUser) return null
     return (
         <View>
-            <Pressable style={styles.container} onPress={() => console.log('hello')}>
-                <View style={styles.imageWrapper}>
+            <Pressable style={styles.container} onPress={enterChatHandler}>
+                <Pressable style={styles.imageWrapper} onPress={userPressHandler}>
                     <View style={[styles.image]}>
                         <SvgXml
                             xml={currentUser.profileImage}
@@ -23,7 +25,7 @@ const Chat: React.FC<ChatProps> = ({ title }) => {
                             height={imageSize + 'pt'}
                         />
                     </View>
-                </View>
+                </Pressable>
                 <View style={styles.textWrapper}>
                     <Text size='h5' style={styles.titleText} numberOfLines={2}>
                         {title}

@@ -27,4 +27,4 @@ export default {
         success,
         error,
     },
-}
+} as const

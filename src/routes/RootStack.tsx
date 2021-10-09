@@ -18,7 +18,8 @@ import TabOneScreen from '@screens/TabOneScreen'
 import TabTwoScreen from '@screens/TabTwoScreen'
 import ChatScreen from '@screens/ChatScreen'
 import ChatsScreen from '@screens/ChatsScreen'
-
+import UserModalScreen from '@screens/UserModalScreen'
+import ChatStack from './ChatStack'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '@src/routes/types'
 import LinkingConfiguration from './LinkingConfiguration'
 
@@ -39,6 +40,7 @@ export default function RootStack() {
             <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name='Modal' component={ModalScreen} />
+                <Stack.Screen name='UserModal' component={UserModalScreen} />
             </Stack.Group>
         </Stack.Navigator>
     )
@@ -55,7 +57,7 @@ function BottomTabNavigator() {
 
     return (
         <BottomTab.Navigator
-            initialRouteName='TabOne'
+            initialRouteName='ChatsStack'
             screenOptions={{
                 tabBarActiveTintColor: Colors[colorScheme].tint,
             }}
@@ -68,7 +70,7 @@ function BottomTabNavigator() {
                     tabBarIcon: ({ color }) => <TabBarIcon name='map' color={color} />,
                     headerRight: () => (
                         <Pressable
-                            onPress={() => navigation.navigate('Modal')}
+                            onPress={() => navigation.navigate('UserModal', { id: 'abc' })}
                             style={({ pressed }) => ({
                                 opacity: pressed ? 0.5 : 1,
                             })}
@@ -106,19 +108,12 @@ function BottomTabNavigator() {
                     ),
                 })}
             />
+
             <BottomTab.Screen
-                name='Chat'
-                component={ChatScreen}
-                options={({ navigation }: RootTabScreenProps<'Chat'>) => ({
-                    title: 'Chat',
-                    tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
-                })}
-            />
-            <BottomTab.Screen
-                name='Chats'
-                component={ChatsScreen}
-                options={({ navigation }: RootTabScreenProps<'Chats'>) => ({
-                    title: 'Chats',
+                name='ChatsStack'
+                component={ChatStack}
+                options={() => ({
+                    headerShown: false,
                     tabBarIcon: ({ color }) => <TabBarIcon name='map' color={color} />,
                 })}
             />
