@@ -117,12 +117,10 @@ export const AuthProvider: React.FC = ({ children }) => {
                 // getting the users data from firestore
                 const response = fs.collection('users').doc(user.uid)
                 const data = await response.get()
-                console.log('data', data.data())
 
                 return { ...user, ...data.data() }
             }
             const response = await fetchUser(user)
-            console.log('response', response)
 
             setCurrentUser(response)
             setFetchingUser(false)

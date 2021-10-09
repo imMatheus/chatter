@@ -10,7 +10,6 @@ import RegistrationStack from './RegistrationStack'
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
     const { currentUser } = useAuth()
-    console.log(currentUser)
 
     return (
         <NavigationContainer

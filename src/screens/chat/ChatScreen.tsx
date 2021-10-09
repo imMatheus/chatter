@@ -1,6 +1,6 @@
 import { Text, View } from '@components/Themed'
 import React from 'react'
-import Message from '@components/chat/Message'
+import Message from './components/Message'
 
 import { ScrollView, StyleSheet } from 'react-native'
 

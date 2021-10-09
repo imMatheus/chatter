@@ -7,9 +7,7 @@ import { RootTabScreenProps } from '../routes/types'
 import { useAuth } from '@context/AuthContext'
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-    const { logout, currentUser } = useAuth()
-    console.log('~~')
-    console.log(currentUser)
+    const { logout } = useAuth()
 
     return (
         <View style={styles.container}>

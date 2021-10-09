@@ -6,8 +6,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as React from 'react'
 
-import Chats from '@screens/ChatsScreen'
-import Chat from '@screens/ChatScreen'
+import Chats from '@src/screens/chat/ChatsScreen'
+import Chat from '@src/screens/chat/ChatScreen'
 import { useAuth, AuthProvider } from '@context/AuthContext'
 
 import { ChatStackParamList } from '@src/routes/types'

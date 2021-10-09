@@ -1,10 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
-import Chat from '@components/chat/Chat'
+import Chat from './components/Chat'
 import { ChatStackParamList, ChatStackProps } from '@routes/types'
 const ChatsScreen: React.FC<ChatStackProps<'Chats'>> = ({ navigation }) => {
-    console.log(navigation)
-
     return (
         <View>
             <ScrollView>

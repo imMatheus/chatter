@@ -7,8 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as React from 'react'
 
 import NotFoundScreen from '@screens/NotFoundScreen'
-import LoginScreen from '@screens/LoginScreen'
-import RegistrationScreen from '@screens/RegistrationScreen'
+import LoginScreen from '@src/screens/registration/LoginScreen'
+import RegistrationScreen from '@src/screens/registration/RegistrationScreen'
 import { useAuth, AuthProvider } from '@context/AuthContext'
 
 import { RegistrationStackParamList } from '@src/routes/types'

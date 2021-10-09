@@ -6,7 +6,7 @@ import { theme } from '@constants/Colors'
 import { createAvatar } from '@dicebear/avatars'
 import * as style from '@dicebear/open-peeps'
 import { SvgXml } from 'react-native-svg'
-import { RegistrationStackProps } from '../routes/types'
+import { RegistrationStackProps } from '@routes/types'
 
 const LoginScreen: React.FC<RegistrationStackProps<'Login'>> = ({ navigation }) => {
     const [email, setEmail] = useState('')

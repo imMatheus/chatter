@@ -12,16 +12,17 @@ import { Pressable } from 'react-native'
 
 import Colors from '@constants/Colors'
 import useColorScheme from '@hooks/useColorScheme'
-import ModalScreen from '@screens/ModalScreen'
+import ModalScreen from '@src/screens/modals/ModalScreen'
 import NotFoundScreen from '@screens/NotFoundScreen'
 import TabOneScreen from '@screens/TabOneScreen'
 import TabTwoScreen from '@screens/TabTwoScreen'
-import ChatScreen from '@screens/ChatScreen'
-import ChatsScreen from '@screens/ChatsScreen'
-import UserModalScreen from '@screens/UserModalScreen'
+import ChatScreen from '@src/screens/chat/ChatScreen'
+import ChatsScreen from '@src/screens/chat/ChatsScreen'
+import UserModalScreen from '@src/screens/modals/UserModalScreen'
 import ChatStack from './ChatStack'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '@src/routes/types'
 import LinkingConfiguration from './LinkingConfiguration'
+import { useAuth } from '@context/AuthContext'
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -54,6 +55,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>()
 
 function BottomTabNavigator() {
     const colorScheme = useColorScheme()
+    const { currentUser } = useAuth()
 
     return (
         <BottomTab.Navigator
@@ -70,7 +72,9 @@ function BottomTabNavigator() {
                     tabBarIcon: ({ color }) => <TabBarIcon name='map' color={color} />,
                     headerRight: () => (
                         <Pressable
-                            onPress={() => navigation.navigate('UserModal', { id: 'abc' })}
+                            onPress={() =>
+                                navigation.navigate('UserModal', { id: currentUser!.uid })
+                            }
                             style={({ pressed }) => ({
                                 opacity: pressed ? 0.5 : 1,
                             })}
