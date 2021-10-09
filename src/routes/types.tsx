@@ -6,20 +6,26 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
 
 declare global {
     namespace ReactNavigation {
         interface RootParamList extends RootStackParamList {}
+        interface RegistrationParamList extends RegistrationStackParamList {}
     }
 }
 
 export type RegistrationStackParamList = {
     Login: undefined
-    Register: undefined
+    Signup: undefined
     ForgotPassword: undefined
-    NotFound: undefined
 }
 
+export type RegistrationStackProps<T extends keyof RegistrationStackParamList> = {
+    navigation: StackNavigationProp<RegistrationStackParamList, T>
+    route: RouteProp<RegistrationStackParamList, T>
+}
 export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined
     Modal: undefined

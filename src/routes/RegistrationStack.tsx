@@ -8,10 +8,11 @@ import * as React from 'react'
 
 import NotFoundScreen from '@screens/NotFoundScreen'
 import LoginScreen from '@screens/LoginScreen'
+import RegistrationScreen from '@screens/RegistrationScreen'
 import { useAuth, AuthProvider } from '@context/AuthContext'
 
-import { RegistrationStackParamList } from '@base/types'
-import { Text, View } from '@src/components/Themed'
+import { RegistrationStackParamList } from '@src/routes/types'
+import { Text, View } from '@components/Themed'
 
 const Stack = createNativeStackNavigator<RegistrationStackParamList>()
 
@@ -20,7 +21,9 @@ export default function Navigation() {
     return (
         <Stack.Navigator>
             <Stack.Screen name='Login' component={LoginScreen} />
-            <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} />
+            <Stack.Screen name='ForgotPassword' component={LoginScreen} />
+            <Stack.Screen name='Signup' component={RegistrationScreen} />
+            {/* <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} /> */}
         </Stack.Navigator>
     )
 }

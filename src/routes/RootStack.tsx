@@ -17,8 +17,9 @@ import NotFoundScreen from '@screens/NotFoundScreen'
 import TabOneScreen from '@screens/TabOneScreen'
 import TabTwoScreen from '@screens/TabTwoScreen'
 import ChatScreen from '@screens/ChatScreen'
+import ChatsScreen from '@screens/ChatsScreen'
 
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '@base/types'
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '@src/routes/types'
 import LinkingConfiguration from './LinkingConfiguration'
 
 /**
@@ -64,7 +65,7 @@ function BottomTabNavigator() {
                 component={TabOneScreen}
                 options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
                     title: 'Tab One',
-                    tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+                    tabBarIcon: ({ color }) => <TabBarIcon name='map' color={color} />,
                     headerRight: () => (
                         <Pressable
                             onPress={() => navigation.navigate('Modal')}
@@ -111,6 +112,14 @@ function BottomTabNavigator() {
                 options={({ navigation }: RootTabScreenProps<'Chat'>) => ({
                     title: 'Chat',
                     tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+                })}
+            />
+            <BottomTab.Screen
+                name='Chats'
+                component={ChatsScreen}
+                options={({ navigation }: RootTabScreenProps<'Chats'>) => ({
+                    title: 'Chats',
+                    tabBarIcon: ({ color }) => <TabBarIcon name='map' color={color} />,
                 })}
             />
         </BottomTab.Navigator>
