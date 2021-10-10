@@ -31,11 +31,10 @@ const LoginScreen: React.FC<RegistrationStackProps<'Login'>> = ({ navigation }) 
 
     const colorScheme = useColorScheme()
 
+    // style={{ fontFamily: 'AvenirNext-UltraLight' }}
     return (
         <SafeAreaView>
-            <Text size='title' style={{ fontFamily: 'AvenirNext-UltraLight' }}>
-                Whats yor name
-            </Text>
+            <Text size='title'>Whats yor name</Text>
             {avatar !== '' ? (
                 <SvgXml xml={avatar} width='100pt' height='100pt' />
             ) : (

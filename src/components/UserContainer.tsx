@@ -1,41 +1,50 @@
 import React from 'react'
-import { Pressable, StyleSheet } from 'react-native'
+import { View, Pressable, StyleSheet } from 'react-native'
 import { useAuth } from '@context/AuthContext'
 import { SvgXml } from 'react-native-svg'
-import { Text, View } from '@components/Themed'
+import { Text } from '@components/Themed'
 import { ChatStackParamList, ChatStackProps } from '@routes/types'
 import Colors from '@constants/Colors'
 import useColorScheme from '@hooks/useColorScheme'
+import { fs } from '@src/firebase'
+
 const imageSize = 50
 
 interface UserContainerProps {
     name: string
     displayName: string
     profileImage: string
+    id: string
+    RightComponent?: React.FC
 }
 
-const UserContainer: React.FC<UserContainerProps> = ({ name, displayName, profileImage }) => {
+const UserContainer: React.FC<UserContainerProps> = ({
+    name,
+    displayName,
+    profileImage,
+    id,
+    RightComponent,
+}) => {
+    const { currentUser } = useAuth()
     const colorSchema = useColorScheme()
+
     return (
-        <View>
-            <Pressable style={styles.container}>
-                <Pressable
-                    style={[
-                        styles.imageWrapper,
-                        { backgroundColor: Colors[colorSchema].backgroundDimmed },
-                    ]}
-                >
-                    <SvgXml xml={profileImage} width={imageSize + 'pt'} height={imageSize + 'pt'} />
-                </Pressable>
-                <View style={styles.textWrapper}>
-                    <Text size='h4' style={styles.titleText} numberOfLines={2}>
-                        {name}
-                    </Text>
-                    <Text style={styles.messageText} numberOfLines={1}>
-                        @{displayName}
-                    </Text>
-                </View>
-            </Pressable>
+        <View style={styles.container}>
+            <View
+                style={[
+                    styles.imageWrapper,
+                    { backgroundColor: Colors[colorSchema].backgroundDimmed },
+                ]}
+            >
+                <SvgXml xml={profileImage} width={imageSize + 'pt'} height={imageSize + 'pt'} />
+            </View>
+            <View style={styles.textWrapper}>
+                <Text size='h4' numberOfLines={1}>
+                    {name}
+                </Text>
+                <Text numberOfLines={1}>@{displayName}</Text>
+            </View>
+            {RightComponent && <RightComponent />}
         </View>
     )
 }
@@ -61,9 +70,7 @@ const styles = StyleSheet.create({
         padding: 10,
         flex: 1,
     },
-    titleText: {},
     dateText: {
         paddingLeft: 10,
     },
-    messageText: {},
 })

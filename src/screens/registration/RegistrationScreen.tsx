@@ -69,9 +69,7 @@ const RegistrationScreen: React.FC<RegistrationStackProps<'Login'>> = ({ navigat
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ScrollView>
-                        <Text size='title' style={{ fontFamily: 'AvenirNext-UltraLight' }}>
-                            {`Welcome to Chatter \nlets get started`}
-                        </Text>
+                        <Text size='title'>{`Welcome to Chatter \nlets get started`}</Text>
                         <Text>{error}</Text>
                         {avatar !== '' && (
                             <View style={styles.avatarContainer}>

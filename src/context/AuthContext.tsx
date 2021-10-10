@@ -40,8 +40,6 @@ async function signup(
         const disassembledDisplayName = getNameCombinations(displayName)
         console.log('---------------------------------------')
 
-        console.log(disassembledDisplayName)
-
         await fs // firestore
             .collection('users')
             .doc(auth.currentUser!.uid) // adding a doc with the the id of the users uid
@@ -121,6 +119,8 @@ export const AuthProvider: React.FC = ({ children }) => {
                 return { ...user, ...data.data() }
             }
             const response = await fetchUser(user)
+
+            console.log(response.name)
 
             setCurrentUser(response)
             setFetchingUser(false)

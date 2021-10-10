@@ -47,7 +47,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
     TabOne: undefined
     TabTwo: undefined
-    ChatsStack: undefined
+    ChatsStack: NavigatorScreenParams<ChatStackParamList> | undefined
     UserModal: {
         id: string
     }

@@ -4,6 +4,9 @@ import { useAuth } from '@context/AuthContext'
 import { SvgXml } from 'react-native-svg'
 import { Text, View } from '@components/Themed'
 import { ChatStackParamList, ChatStackProps } from '@routes/types'
+import useColorScheme from '@hooks/useColorScheme'
+import Colors from '@constants/Colors'
+
 interface ChatProps {
     title: string
     enterChatHandler: () => void
@@ -13,11 +16,19 @@ interface ChatProps {
 const Chat: React.FC<ChatProps> = ({ title, enterChatHandler, userPressHandler }) => {
     const { currentUser } = useAuth()
     const imageSize = 50
+    const colorSchema = useColorScheme()
+
     if (!currentUser) return null
     return (
         <View>
             <Pressable style={styles.container} onPress={enterChatHandler}>
-                <Pressable style={styles.imageWrapper} onPress={userPressHandler}>
+                <Pressable
+                    style={[
+                        styles.imageWrapper,
+                        { backgroundColor: Colors[colorSchema].backgroundDimmed },
+                    ]}
+                    onPress={userPressHandler}
+                >
                     <View style={[styles.image]}>
                         <SvgXml
                             xml={currentUser.profileImage}
@@ -57,10 +68,12 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         flex: 0,
+        borderRadius: 9999,
     },
     image: {
         borderRadius: 9999,
         overflow: 'hidden',
+        backgroundColor: 'transparent',
     },
     textWrapper: {
         padding: 10,
