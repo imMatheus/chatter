@@ -1,6 +1,6 @@
 export const tintColorLight = '#2f95dc'
 export const tintColorDark = '#fff'
-export const theme = '#2D82B7'
+export const theme = '#0000ff'
 export const success = '#2D82B7'
 export const error = '#2D82B7'
 
