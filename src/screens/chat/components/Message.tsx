@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Pressable } from 'react-native'
-import { Text, View } from '@components/Themed'
+import { View, StyleSheet, Pressable } from 'react-native'
+import { Text } from '@components/Themed'
 import Colors, { theme } from '@constants/Colors'
 import { useAuth } from '@context/AuthContext'
 import { SvgXml } from 'react-native-svg'
@@ -11,32 +11,39 @@ interface MessageProps {
     image?: string
 }
 
+const imageSize = 32
+
 const Message: React.FC<MessageProps> = ({ text, fromMe, image }) => {
     const { currentUser } = useAuth()
-    const imageSize = 50
+
+    console.log(fromMe)
+
     if (!currentUser) return null
     return (
-        <View style={styles.outerWrapper}>
-            <Pressable style={styles.imageWrapper}>
-                <View style={[styles.image]}>
-                    <SvgXml
-                        xml={image || currentUser.profileImage}
-                        width={imageSize + 'pt'}
-                        height={imageSize + 'pt'}
-                    />
-                </View>
-            </Pressable>
-
-            <View style={[styles.container]}>
-                <Text size='h5'>
-                    Matheus Mendes
-                    <View>
-                        <Text size='subtitle' style={{ paddingLeft: 8 }}>
-                            6:34PM
-                        </Text>
+        <View style={[styles.outerWrapper, fromMe ? styles.alignRight : {}]}>
+            {!fromMe && (
+                <Pressable
+                    style={[
+                        styles.imageWrapper,
+                        { backgroundColor: Colors.light.backgroundDimmed },
+                    ]}
+                >
+                    <View style={[styles.image]}>
+                        <SvgXml
+                            xml={image || currentUser.profileImage}
+                            width={imageSize + 'pt'}
+                            height={imageSize + 'pt'}
+                        />
                     </View>
-                </Text>
-                <Text>{text}</Text>
+                </Pressable>
+            )}
+            <View
+                style={[
+                    styles.container,
+                    { backgroundColor: fromMe ? theme : Colors.light.backgroundDimmed },
+                ]}
+            >
+                <Text style={fromMe && { color: '#fff' }}>{text}</Text>
             </View>
         </View>
     )
@@ -49,15 +56,23 @@ const styles = StyleSheet.create({
         marginTop: 8,
         flexDirection: 'row',
     },
+    alignRight: {
+        alignSelf: 'flex-end',
+    },
     container: {
-        paddingHorizontal: 8,
-        paddingVertical: 4,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
         maxWidth: '80%',
+        borderRadius: 15,
+        borderBottomLeftRadius: 0,
     },
     imageWrapper: {
-        width: 50,
-        height: 50,
+        width: imageSize,
+        height: imageSize,
+        overflow: 'hidden',
+        borderRadius: 50,
         flex: 0,
+        marginRight: 8,
     },
     image: {
         overflow: 'hidden',
